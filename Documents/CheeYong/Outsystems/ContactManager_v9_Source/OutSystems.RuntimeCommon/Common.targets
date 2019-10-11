@@ -1,0 +1,79 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> 
+
+  <PropertyGroup>
+    <ESpaceRoot Condition="'$(ESpaceRoot)' == ''">$(MSBuildThisFileDirectory)..\</ESpaceRoot>
+    <local-nodejs-path>$(ESpaceRoot)Commons\ThirdParty\nodejs\</local-nodejs-path>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <MRGenExePath Condition="'$(MRGenExePath)' == ''">$(MSBuildThisFileDirectory)mrgen\bin\$(ConfigurationName)\mrgen.exe</MRGenExePath>
+    <MRGenMessagesXMLPath Condition="'$(MRGenMessagesXMLPath)' == ''">$(ProjectDir)Messages.xml</MRGenMessagesXMLPath>
+    <MRGenMessagesResxPath Condition="'$(MRGenMessagesResxPath)' == ''">$(ProjectDir)messages.resx</MRGenMessagesResxPath>
+    <MRGenMessagesOutput Condition="'$(MRGenMessagesOutput)' == ''">$(ProjectDir)messageresource.cs</MRGenMessagesOutput>
+    <MRGenNamespace Condition="'$(MRGenNamespace)' == ''">$(RootNamespace)</MRGenNamespace>
+
+    <ModelPluginGeneratorExe Condition="'$(ModelPluginGeneratorExe)' == ''">$(ESpaceRoot)Build\$(Configuration)\ModelPluginGenerator.exe</ModelPluginGeneratorExe>
+    <ModelPluginGeneratorCache Condition="'$(ModelPluginGeneratorCache)' == ''">$(IntermediateOutputPath)$(AssemblyName).modelplugin.cache</ModelPluginGeneratorCache>
+
+    <local-nodejs-tsc>$(local-nodejs-path)tsc</local-nodejs-tsc>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <BuildDependsOn>$(BuildDependsOn);WriteCacheMarkerFiles</BuildDependsOn>
+    <TypeScriptBuildDependsOn>BuiltProjectOutputGroupDependencies;TypeScriptPrepareItems</TypeScriptBuildDependsOn>
+  </PropertyGroup>
+
+  <Target Name="TypeScriptPrepareItems">
+    <!-- override this target to add generated .ts and .d.ts files
+         to the TypeScriptCompile and TypeScriptDTSFile collections
+         -->
+  </Target>
+
+  <Target Name="TypeScriptBuild"
+          DependsOnTargets="$(TypeScriptBuildDependsOn)"
+          Inputs="@(TypeScriptCompile);@(TypeScriptDTSFile);@(TypeScriptTSConfig);@(BuiltProjectOutputGroupDependency);@(TypeScriptExtraDependencies)"
+          Outputs="@(TypeScriptCompile -> '%(rootdir)%(directory)%(filename).js')">
+    <Exec Command="&quot;$(local-nodejs-tsc)&quot; -p %(TypeScriptTSConfig.FullPath)" />
+    <ItemGroup>
+      <TypeScriptBuiltItems Include="@(TypeScriptCompile -> '%(rootdir)%(directory)%(filename).js')" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="TestT">
+    <ItemGroup>
+      <TestItem Include="a" />
+      <TestItem Include="b" />
+      <TestItem Include="c" />
+    </ItemGroup>
+    <Exec Command="echo %(TestItem.Identity)" />
+  </Target>
+
+  <Target Name="RunMRGen"
+          Inputs="$(MRGenMessagesXMLPath)"
+          Outputs="$(MRGenMessagesOutput);$(MRGenMessagesResxPath)">
+    <Error Condition="'$(MRGenNamespace)' == ''" Text="Namespace for MRGen not defined" />
+    <Error Condition="!Exists($(MRGenExePath))"  Text="MRGen.exe wasn't built before trying to use it." />
+    <Exec Command="&quot;$(MRGenExePath)&quot; &quot;$(MRGenMessagesXMLPath)&quot; &quot;$(MRGenMessagesResxPath)&quot; &quot;$(MRGenMessagesOutput)&quot; $(MRGenNamespace)" />
+  </Target>
+
+  <Target Name="ModelPluginGeneratorInner">
+    <Error Text="The ModelPluginGeneratorInner target needs to be defined to use the wrapper" />
+  </Target>
+
+  <Target Name="ModelPluginGeneratorWrapper" Inputs="$(ModelPluginGeneratorExe);$(ModelPluginGeneratorInput)" Outputs="$(ModelPluginGeneratorCache)">
+    <Message Text="Running ModelPluginGenerator" Importance="high" />
+    <Error Condition="'$(ModelPluginGeneratorInput)' == ''" Text="The ModelPluginGeneratorInput property isn't defined" />
+    <CallTarget Targets="ModelPluginGeneratorInner" />
+    <ItemGroup>
+      <CacheMarkerFiles Include="$(ModelPluginGeneratorCache)" />
+      <FileWrites Include="$(ModelPluginGeneratorCache)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="WriteCacheMarkerFiles">
+    <Touch Files="@(CacheMarkerFiles)" AlwaysCreate="true" />
+    <ItemGroup>
+      <FileWrites Include="@(CacheMarkerFiles)" />
+    </ItemGroup>
+  </Target>
+</Project>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{44AD51AB-D34E-4F1E-8246-E87B6ABC2A40}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OutSystems.Logging</RootNamespace>
+    <AssemblyName>OutSystems.Logging</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.5\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\OutSystems.RuntimeCommon\Properties\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AbstractLoggingTargetFactory.cs" />
+    <Compile Include="ILoggingDatabaseService.cs" />
+    <Compile Include="ILoggingTargetFactory.cs" />
+    <Compile Include="Implementations\LoggerAsynchronous.cs" />
+    <Compile Include="Implementations\NLogLoggerImplementation.cs" />
+    <Compile Include="Implementations\OutSystemsLogEventInfo.cs" />
+    <Compile Include="LogDefinition\ICustomLog.cs" />
+    <Compile Include="LoggerImplementation.cs" />
+    <Compile Include="LoggingPluginProvider.cs" />
+    <Compile Include="ILoggingPlugin.cs" />
+    <Compile Include="LogDefinition\AbstractLogDefinition.cs" />
+    <Compile Include="LogDefinition\CustomLog.cs" />
+    <Compile Include="LogDefinition\CyclicJobLog.cs" />
+    <Compile Include="LogDefinition\ErrorLog.cs" />
+    <Compile Include="LogDefinition\ExtensionLog.cs" />
+    <Compile Include="LogDefinition\GeneralLog.cs" />
+    <Compile Include="LogDefinition\ServiceAPILogDefinition.cs" />
+    <Compile Include="LogDefinition\ServiceAPIDetailLogDefinition.cs" />
+    <Compile Include="LogDefinition\IntDetailLog.cs" />
+    <Compile Include="LogDefinition\IntegrationLog.cs" />
+    <Compile Include="LogDefinition\LicensingLog.cs" />
+    <Compile Include="LogDefinition\MobileRequestLog.cs" />
+    <Compile Include="LogDefinition\MRDetailLog.cs" />
+    <Compile Include="LogDefinition\RequestEvent.cs" />
+    <Compile Include="LogDefinition\ScreenLog.cs" />
+    <Compile Include="LogDefinition\WebReferenceLog.cs" />
+    <Compile Include="LogDefinition\WebServiceLog.cs" />
+    <Compile Include="LoggerSettings.cs" />
+    <Compile Include="Implementations\NullLogger.cs" />
+    <Compile Include="OutSystemsSplitGroupTarget.cs" />
+    <Compile Include="RuntimeLogger.ServiceProvider.cs" />
+    <Compile Include="TracingTarget.cs" />
+    <Compile Include="Utils\LogThrottle.cs" />
+    <Compile Include="Utils\PerformanceCounterUtils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuntimeLogger.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseAbstractionLayer\DatabaseAbstractionLayer.csproj">
+      <Project>{e451fec9-2b6b-45a2-8ab9-57196f4557e8}</Project>
+      <Name>DatabaseAbstractionLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OutSystems.RuntimeCommon\OutSystems.RuntimeCommon.csproj">
+      <Project>{a99f44d3-9d76-4aa1-a833-ba2d283ad22e}</Project>
+      <Name>OutSystems.RuntimeCommon</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3EF55125-0623-4DA7-9DA2-236B6B29D1B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OutSystems.HubEdition.DatabaseProvider.Oracle</RootNamespace>
+    <AssemblyName>OutSystems.HubEdition.OracleDatabaseProvider</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Platform\Configuration\LoggingDatabaseConfigurationManager.cs" />
+    <Compile Include="Platform\Configuration\LoggingDatabaseConfiguration.cs" />
+    <Compile Include="Platform\Configuration\TwoUserDatabaseConfiguration.cs" />
+    <Compile Include="Platform\Configuration\BusinessDatabaseConfigurationManager.cs" />
+    <Compile Include="Platform\Configuration\TwoUserDatabaseConfigurationManager.cs" />
+    <Compile Include="ConfigurationService\DatabaseConfiguration.cs" />
+    <Compile Include="ConfigurationService\RuntimeDatabaseConfiguration.cs" />
+    <Compile Include="DatabaseObjects\AutoNumberColumnInfo.cs" />
+    <Compile Include="DatabaseObjects\DatabaseInfo.cs" />
+    <Compile Include="DatabaseObjects\DataTypeInfo.cs" />
+    <Compile Include="DatabaseObjects\DatabaseObjectFactory.cs" />
+    <Compile Include="DatabaseObjects\TableSourceColumnInfo.cs" />
+    <Compile Include="DatabaseObjects\TableSourceForeignKeyInfo.cs" />
+    <Compile Include="DatabaseObjects\TableSourceInfo.cs" />
+    <Compile Include="DMLService\DMLAggregateFunctions.cs" />
+    <Compile Include="DMLService\DMLQueries.cs" />
+    <Compile Include="DatabaseProvider.cs" />
+    <Compile Include="DMLService\DMLSyntaxHighlightDefinitions.cs" />
+    <Compile Include="ExecutionService\OracleDataReaderWrapper.cs" />
+    <Compile Include="ExecutionService\OracleTypeHelper.cs" />
+    <Compile Include="Platform\Configuration\BusinessDatabaseConfiguration.cs" />
+    <Compile Include="Platform\Configuration\TestConnectionUtils.cs" />
+    <Compile Include="Platform\ExecutionService\PlatformExecutionService.cs" />
+    <Compile Include="Platform\PlatformProviderProperties.cs" />
+    <Compile Include="Platform\DatabaseObjects\PlatformDatabaseObjectFactory.cs" />
+    <Compile Include="Platform\DatabaseObjects\PlatformDataTypeInfo.cs" />
+    <Compile Include="Platform\DatabaseObjects\PlatformTableSourceColumnInfo.cs" />
+    <Compile Include="Platform\DatabaseObjects\PlatformTableSourceIndexInfo.cs" />
+    <Compile Include="Platform\DatabaseObjects\PlatformTableSourceInfo.cs" />
+    <Compile Include="Platform\DatabaseObjects\PlatformTableSourceTriggerInfo.cs" />
+    <Compile Include="Platform\Session\ParamPrefixer.cs" />
+    <Compile Include="Platform\Session\Params.cs" />
+    <Compile Include="Platform\Configuration\PlatformConfigurationManager.cs" />
+    <Compile Include="Platform\Session\PlatformSessionService.cs" />
+    <Compile Include="Platform\Configuration\SessionConfigurationManager.cs" />
+    <Compile Include="Platform\Configuration\SessionDatabaseConfiguration.cs" />
+    <Compile Include="Platform\Configuration\PlatformDatabaseConfiguration.cs" />
+    <Compile Include="Platform\DMLService\PlatformDMLIdentifiers.cs" />
+    <Compile Include="Platform\DMLService\PlatformDMLProgrammaticSQL.cs" />
+    <Compile Include="Platform\DMLService\PlatformDMLFunctions.cs" />
+    <Compile Include="Platform\DMLService\PlatformDMLService.cs" />
+    <Compile Include="Platform\IntrospectionService\PlatformIntrospectionService.cs" />
+    <Compile Include="Platform\DDLService\DDLService.cs" />
+    <Compile Include="DMLService\DMLDefaultValues.cs" />
+    <Compile Include="DMLService\DMLService.cs" />
+    <Compile Include="DMLService\DMLFunctions.cs" />
+    <Compile Include="DMLService\DMLOperators.cs" />
+    <Compile Include="DMLService\DMLEntityActions.cs" />
+    <Compile Include="DMLService\DMLIdentifiers.cs" />
+    <Compile Include="ExecutionService\ExecutionService.cs" />
+    <Compile Include="IntrospectionService\IntrospectionService.cs" />
+    <Compile Include="Platform\PlatformDatabaseProvider.cs" />
+    <Compile Include="DatabaseServices.cs" />
+    <Compile Include="Platform\PlatformDatabaseServices.cs" />
+    <Compile Include="Platform\Session\TimeSpans.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\OutSystems.RuntimeCommon\Properties\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="ProviderProperties.cs" />
+    <Compile Include="TransactionService\TransactionManager.cs" />
+    <Compile Include="TransactionService\TransactionService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OutSystems.RuntimeCommon\OutSystems.RuntimeCommon.csproj">
+      <Project>{a99f44d3-9d76-4aa1-a833-ba2d283ad22e}</Project>
+      <Name>OutSystems.RuntimeCommon</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DatabaseAbstractionLayer\DatabaseAbstractionLayer.csproj">
+      <Project>{e451fec9-2b6b-45a2-8ab9-57196f4557e8}</Project>
+      <Name>DatabaseAbstractionLayer</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\Oracle.ManagedDataAccess.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent></PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent></PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

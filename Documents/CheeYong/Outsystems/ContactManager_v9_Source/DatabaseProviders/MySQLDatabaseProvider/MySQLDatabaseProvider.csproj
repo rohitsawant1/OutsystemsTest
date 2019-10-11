@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B4249E72-A4EE-40C9-BBC3-F7BA2B225B49}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OutSystems.HubEdition.DatabaseProvider.MySQL</RootNamespace>
+    <AssemblyName>OutSystems.HubEdition.MySQLDatabaseProvider</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mysql.data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\mysql.data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Platform\ConfigurationService\MySQLLoggingDatabaseConfigurationManager.cs" />
+    <Compile Include="Platform\ConfigurationService\MySQLLoggingDatabaseConfiguration.cs" />
+    <Compile Include="Platform\ConfigurationService\MySQLTwoUserDatabaseConfiguration.cs" />
+    <Compile Include="Platform\ConfigurationService\MySQLTwoUserDatabaseConfigurationManager.cs" />
+    <Compile Include="Platform\ConfigurationService\MySQLBusinessDatabaseConfigurationManager.cs" />
+    <Compile Include="ConfigurationService\MySQLRuntimeDatabaseConfiguration.cs" />
+    <Compile Include="DatabaseObjects\MySQLDatabaseInfo.cs" />
+    <Compile Include="DatabaseObjects\MySQLDataTypeInfo.cs" />
+    <Compile Include="DatabaseObjects\MySQLDatabaseObjectFactory.cs" />
+    <Compile Include="DatabaseObjects\MySQLTableSourceColumnInfo.cs" />
+    <Compile Include="DatabaseObjects\MySQLTableSourceForeignKeyInfo.cs" />
+    <Compile Include="DatabaseObjects\MySQLTableSourceInfo.cs" />
+    <Compile Include="DMLService\MySQLDMLSyntaxHighlightDefinitions.cs" />
+    <Compile Include="DMLService\MySQLDMLAggregateFunctions.cs" />
+    <Compile Include="ExecutionService\MySQLDataReaderWrapper.cs" />
+    <Compile Include="MySQLDatabaseProvider.cs" />
+    <Compile Include="ConfigurationService\MySQLDatabaseConfiguration.cs" />
+    <Compile Include="DMLService\MySQLDMLDefaultValues.cs" />
+    <Compile Include="DMLService\MySQLDMLEntityActions.cs" />
+    <Compile Include="DMLService\MySQLDMLFunctions.cs" />
+    <Compile Include="DMLService\MYSQLDMLIdentifiers.cs" />
+    <Compile Include="DMLService\MySQLDMLOperators.cs" />
+    <Compile Include="DMLService\MySQLDMLQueries.cs" />
+    <Compile Include="DMLService\MySQLDMLService.cs" />
+    <Compile Include="ExecutionService\MySQLExecutionService.cs" />
+    <Compile Include="IntrospectionService\MySQLIntrospectionService.cs" />
+    <Compile Include="MySQLDatabaseServices.cs" />
+    <Compile Include="Platform\ConfigurationService\MySQLBusinessDatabaseConfiguration.cs" />
+    <Compile Include="MySQLProviderProperties.cs" />
+    <Compile Include="Platform\ConfigurationService\MySQLPlatformConfigurationManager.cs" />
+    <Compile Include="Platform\ConfigurationService\MySQLPlatformDatabaseConfiguration.cs" />
+    <Compile Include="Platform\ConfigurationService\MySQLSessionConfigurationManager.cs" />
+    <Compile Include="Platform\ConfigurationService\MySQLSessionDatabaseConfiguration.cs" />
+    <Compile Include="Platform\DatabaseObjects\MySQLPlatformDatabaseObjectFactory.cs" />
+    <Compile Include="Platform\DatabaseObjects\MySQLPlatformDataTypeInfo.cs" />
+    <Compile Include="Platform\DatabaseObjects\MySQLPlatformTableSourceColumnInfo.cs" />
+    <Compile Include="Platform\DatabaseObjects\MySQLPlatformTableSourceIndexInfo.cs" />
+    <Compile Include="Platform\DatabaseObjects\MySQLPlatformTableSourceInfo.cs" />
+    <Compile Include="Platform\DatabaseObjects\MySQLPlatformTableSourceTriggerInfo.cs" />
+    <Compile Include="Platform\DDLService\MySQLDDLService.cs" />
+    <Compile Include="Platform\DMLService\MySQLPlatformDMLFunctions.cs" />
+    <Compile Include="Platform\DMLService\MySQLPlatformDMLIdentifiers.cs" />
+    <Compile Include="Platform\DMLService\MySQLPlatformDMLProgrammaticSQL.cs" />
+    <Compile Include="Platform\DMLService\MySQLPlatformDMLService.cs" />
+    <Compile Include="Platform\ExecutionService\MySQLPlatformExecutionService.cs" />
+    <Compile Include="Platform\IntrospectionService\MySQLPlatformIntrospectionService.cs" />
+    <Compile Include="Platform\MySQLPlatformDatabaseProvider.cs" />
+    <Compile Include="Platform\MySQLPlatformDatabaseServices.cs" />
+    <Compile Include="Platform\MySQLPlatformProviderProperties.cs" />
+    <Compile Include="Platform\Session\MySQLParamPrefixer.cs" />
+    <Compile Include="Platform\Session\MySQLParams.cs" />
+    <Compile Include="Platform\Session\MySQLPlatformSessionService.cs" />
+    <Compile Include="Platform\Session\MySQLTimeSpans.cs" />
+    <Compile Include="TransactionService\MySQLTransactionService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\OutSystems.RuntimeCommon\Properties\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OutSystems.RuntimeCommon\OutSystems.RuntimeCommon.csproj">
+      <Project>{a99f44d3-9d76-4aa1-a833-ba2d283ad22e}</Project>
+      <Name>OutSystems.RuntimeCommon</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DatabaseAbstractionLayer\DatabaseAbstractionLayer.csproj">
+      <Project>{e451fec9-2b6b-45a2-8ab9-57196f4557e8}</Project>
+      <Name>DatabaseAbstractionLayer</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\mysql.data.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent></PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent></PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

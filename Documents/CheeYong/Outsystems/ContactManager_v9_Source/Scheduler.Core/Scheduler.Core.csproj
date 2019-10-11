@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{253BCB9E-26E7-4E7A-9CF7-EDEA49FB303E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OutSystems.Scheduler.Core</RootNamespace>
+    <AssemblyName>Scheduler.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\OutSystems.RuntimeCommon\Properties\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AbstractEventJob.cs" />
+    <Compile Include="ActivityJob.cs" />
+    <Compile Include="Configuration\SchedulerSettings.cs" />
+    <Compile Include="Db\DBScheduler.cs" />
+    <Compile Include="Db\DBSchedulerMySQL.cs" />
+    <Compile Include="Db\DBSchedulerOracle.cs" />
+    <Compile Include="EmailJob.cs" />
+    <Compile Include="EventJob.cs" />
+    <Compile Include="Jobs\JobFactory.cs" />
+    <Compile Include="Jobs\SingleJobFactory.cs" />
+    <Compile Include="LightEventJob.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueueKey.cs" />
+    <Compile Include="SchedulerRunner.cs" />
+    <Compile Include="SchedulerProducerConsumer.cs" />
+    <Compile Include="SchedulerUtils.cs" />
+    <Compile Include="SMTP.cs" />
+    <Compile Include="TimerJob.cs" />
+    <Compile Include="TimersClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OutSystems.RuntimeCommon\OutSystems.RuntimeCommon.csproj">
+      <Project>{a99f44d3-9d76-4aa1-a833-ba2d283ad22e}</Project>
+      <Name>OutSystems.RuntimeCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DatabaseAbstractionLayer\DatabaseAbstractionLayer.csproj">
+      <Project>{E451FEC9-2B6B-45A2-8AB9-57196F4557E8}</Project>
+      <Name>DatabaseAbstractionLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RuntimePlatform\RuntimePlatform.csproj">
+      <Project>{EFB0D1E3-076D-4F16-A595-B33BFC5B3F18}</Project>
+      <Name>RuntimePlatform</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
